@@ -9,12 +9,12 @@ public class MatchResultFileReader {
     private Scanner scanner;
     List<MatchResult> matchResultList = new ArrayList<>();
 
-    public MatchResultFileReader(String fileName) throws FileNotFoundException{
+    public MatchResultFileReader(String fileName) throws FileNotFoundException {
         File file = new File(fileName);
         scanner = new Scanner(file);
     }
 
-    public List<MatchResult> readFile(){
+    public List<MatchResult> readFile() {
         String csvMatchResult;
         String[] tokens;
         String delimiterMatch = ";";
@@ -26,6 +26,8 @@ public class MatchResultFileReader {
             csvMatchResult = scanner.nextLine();
             tokens = csvMatchResult.split(delimiterMatch);
             String teams = tokens[0];
+
+            goalScorerList = new ArrayList<>();
             if (tokens.length > 1) {
                 String[] goalScorers = tokens[1].split(delimiterGoalScorer);
                 goalScorerList = Arrays.asList(goalScorers);
@@ -39,8 +41,13 @@ public class MatchResultFileReader {
     }
 
     @Override
-    public String toString(){
-        return "Match Result: "+ matchResultList;
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for(MatchResult matchResult : matchResultList){
+            result.append(matchResult.toString()).append("\n");
+        }
+        return result.toString();
+
     }
 
 }

@@ -12,4 +12,9 @@ public class MatchResult {
     public List<String> getGoalScorers() {
         return goalScorers;
     }
+
+    @Override
+    public String toString(){
+        return "Goal Scorer: " + goalScorers;
+    }
 }
