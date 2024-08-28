@@ -10,10 +10,8 @@ public class Statistics {
 
     }
 
-    public Set<String> getGoalScorers()  {
+    public Set<String> getGoalScorers() {
         Set<String> goalScorers = new HashSet<>();
-
-
         return goalScorers;
     }
 
@@ -24,9 +22,15 @@ public class Statistics {
     }
 
     public int getNumberOfGoals(String goalScorer) {
-
-
-        return 0;
+        int numberOfGoals = 0;
+        for (MatchResult matchResult : matchResults) {
+            for(String scorer : matchResult.getGoalScorers()){
+                if(scorer.equalsIgnoreCase(goalScorer)){
+                    numberOfGoals++;
+                }
+            }
+        }
+        return numberOfGoals;
 
     }
 }
