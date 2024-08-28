@@ -6,19 +6,32 @@ public class Statistics {
 
     private List<MatchResult> matchResults;
 
+
+
     public Statistics(String filename) throws FileNotFoundException {
+        MatchResultFileReader mrfr = new MatchResultFileReader(filename);
+        matchResults = mrfr.readFile();
 
     }
 
     public Set<String> getGoalScorers() {
         Set<String> goalScorers = new HashSet<>();
+        for (MatchResult matchResult : matchResults) {
+            for(String scorer : matchResult.getGoalScorers()){
+               goalScorers.add(scorer);
+        }
+    }
         return goalScorers;
     }
 
     public Map<String, Integer> getGoalScorersWithTotals() {
-
-
-        return null;
+        Map<String, Integer> scorerAndGoals = new HashMap<>();
+        Set<String> listOfGoalScorers = getGoalScorers();
+        for(String goalScorer: listOfGoalScorers) {
+            int goals = getNumberOfGoals(goalScorer);
+            scorerAndGoals.put(goalScorer,goals);
+        }
+    return scorerAndGoals;
     }
 
     public int getNumberOfGoals(String goalScorer) {
@@ -31,6 +44,5 @@ public class Statistics {
             }
         }
         return numberOfGoals;
-
     }
 }

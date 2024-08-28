@@ -6,8 +6,10 @@ public class Main {
         Statistics statistics = new Statistics("Euro2024QualifyingRound.csv");
         mrfr.readFile();
 
-        System.out.println(mrfr.toString());
+        System.out.println(mrfr);
 
-        System.out.println(statistics.getGoalScorers());
+        System.out.println(statistics.getGoalScorersWithTotals());
+        String player = "Delaney";
+        System.out.println(player + ": " + statistics.getNumberOfGoals(player));
     }
 }
